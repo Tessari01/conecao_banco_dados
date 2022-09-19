@@ -5,13 +5,14 @@ class usuario
 private $pdo;
 public $msgErro=""; // vazio pq deu certo
 
-
-    public function conectar($nome,$host,$usuario,$senha)
+    public function conectar()
     {
         global $pdo;
         global $msgErro;
-        try{
-            $pdo =new PDO("mysql:dbname=".$nome.";host=".$host,$usuario,$senha);
+        try{              
+          
+            $pdo =new PDO('mysql:host=localhost;dbname=projeto_login','root','');
+           
         } catch (PDOException $e){
             $msg=$e->getMessage();
         }     
@@ -31,7 +32,7 @@ public $msgErro=""; // vazio pq deu certo
         }
         else{
              //caso nao, cadastrar
-             $sql=$pdo->prepare("INSERT INTO usuarios(nome,telefone, email,senha) VALUES (:n,:t,:e,:s)");
+             $sql=$pdo->prepare("INSERT INTO usuarios(nome,telefone,email,senha) VALUES (:n,:t,:e,:s)");
              $sql->bidValue(":n",$nome);
              $sql->bidValue(":t",$telefone);
              $sql->bidValue(":e",$email);
@@ -39,7 +40,8 @@ public $msgErro=""; // vazio pq deu certo
              $sql->execute();
              return true;// cadastrado com sucesso
         }
-                
+         
+        print_r($sql);
         //caso nao, cadastrar
     }
 

@@ -2,15 +2,6 @@
 require_once('Classes/usuarios.php');
 $u= new usuario;
 
-//-------------acesso ao banco-----
-$nome1 ="projeto_login";
-$host1 = "localhost";
-$usuario1 = "root";
-$senha1 = "";
-
-
-echo $nome1;
-
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +40,8 @@ echo $nome1;
             // veridificar se esta preenchido
         if (!empty($nome) && !empty($telefone) && !empty($email) && !empty($senha) && !empty($confsenha))
         {   
-            $u->conectar("projeto_login","localhost","root","");
+          $u->conectar();
+
             if($u->$msgErro=="")//se esta tudo OK
                 {
                         if($senha==$confsenha)
